@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Максим Бакута — Резюме</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --panel: #0f1629;
+      --border: #1a2a4a;
+      --accent: #00d4ff;
+      --accent2: #00ff88;
+      --text: #c8d8f0;
+      --muted: #5a7a9a;
+      --heading: #ffffff;
+      --glow: 0 0 18px rgba(0,212,255,0.35);
+      --glow2: 0 0 14px rgba(0,255,136,0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Language Switcher ── */
+    .lang-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      padding: 6px 14px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: all 0.2s;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: var(--glow);
+    }
+
+    /* ── Header ── */
+    .header {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+    }
+
+    .header::after {
+      content: 'v1.0.0';
+      position: absolute;
+      top: 12px; right: 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2px;
+    }
+
+    .name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(32px, 7vw, 56px);
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .name span {
+      color: var(--accent);
+    }
+
+    .title-role {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: var(--accent2);
+      letter-spacing: 4px;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .meta-item::before {
+      content: '// ';
+      color: var(--accent);
+    }
+
+    /* ── Sections ── */
+    .section {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 28px 36px;
+      margin-bottom: 16px;
+      position: relative;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .section:nth-child(2) { animation-delay: 0.1s; }
+    .section:nth-child(3) { animation-delay: 0.2s; }
+    .section:nth-child(4) { animation-delay: 0.3s; }
+    .section:nth-child(5) { animation-delay: 0.4s; }
+
+    .section-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    .section h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--heading);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    p, li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li::before {
+      content: '▸ ';
+      color: var(--accent2);
+      font-size: 12px;
+    }
+
+    /* ── Skills Grid ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .skill-tag {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      padding: 5px 12px;
+      letter-spacing: 1px;
+      clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: rgba(0,212,255,0.12);
+      box-shadow: var(--glow);
+    }
+
+    .skill-tag.green {
+      background: rgba(0,255,136,0.06);
+      border-color: rgba(0,255,136,0.2);
+      color: var(--accent2);
+    }
+
+    .skill-tag.green:hover {
+      background: rgba(0,255,136,0.12);
+      box-shadow: var(--glow2);
+    }
+
+    /* ── Status bar ── */
+    .statusbar {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .statusbar span { color: var(--accent2); }
+
+    /* ── Animations ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Language visibility ── */
+    .lang-content { display: none; }
+    .lang-content.visible { display: block; }
+
+    @media (max-width: 560px) {
+      .header, .section { padding: 22px 20px; }
+      .meta-row { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Language switcher -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('kz')">KZ</button>
+  </div>
+
+  <!-- ══════════════════ РУССКИЙ ══════════════════ -->
+  <div id="ru" class="lang-content visible">
+
+    <div class="header">
+      <div class="name">Максим <span>Бакута</span></div>
+      <div class="title-role">[ Junior DevSecOps Engineer ]</div>
+      <div class="meta-row">
+        <span class="meta-item">14 лет</span>
+        <span class="meta-item">8 класс</span>
+        <span class="meta-item">Уральск, Казахстан</span>
+        <span class="meta-item">Школа №9</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">01 — О себе</div>
+      <p>Меня зовут Максим Бакута. Мне 14 лет, я учусь в 8 классе школы №9 города Уральск. Я начинающий DevSecOps инженер — специалист, который совмещает разработку, безопасность и эксплуатацию IT-систем. Меня увлекают технологии, кибербезопасность и автоматизация процессов.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">02 — Образование</div>
+      <ul>
+        <li>Общеобразовательная школа №9 — г. Уральск, Казахстан</li>
+        <li>8 класс (текущий учебный год)</li>
+        <li>Самообучение: DevSecOps, Linux, основы сетей и кибербезопасности</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">03 — Навыки</div>
+      <div class="skills-grid">
+        <span class="skill-tag">Linux / Bash</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Docker (основы)</span>
+        <span class="skill-tag">CI/CD (основы)</span>
+        <span class="skill-tag">Сетевая безопасность</span>
+        <span class="skill-tag green">Python (изучаю)</span>
+        <span class="skill-tag green">Кибербезопасность</span>
+        <span class="skill-tag green">HTML / CSS</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">04 — Цели</div>
+      <ul>
+        <li>Развиваться в области DevSecOps и облачных технологий</li>
+        <li>Получить первый профессиональный опыт в IT</li>
+        <li>Изучить Python, Kubernetes и облачные платформы (AWS / Azure)</li>
+        <li>Внести вклад в open-source проекты</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">05 — Языки</div>
+      <ul>
+        <li>Русский — родной</li>
+        <li>Казахский — разговорный</li>
+        <li>Английский — технический (чтение документации)</li>
+      </ul>
+    </div>
+
+  </div><!-- /ru -->
+
+  <!-- ══════════════════ ENGLISH ══════════════════ -->
+  <div id="en" class="lang-content">
+
+    <div class="header">
+      <div class="name">Maxim <span>Bakuta</span></div>
+      <div class="title-role">[ Junior DevSecOps Engineer ]</div>
+      <div class="meta-row">
+        <span class="meta-item">Age 14</span>
+        <span class="meta-item">Grade 8</span>
+        <span class="meta-item">Oral, Kazakhstan</span>
+        <span class="meta-item">School #9</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">01 — About Me</div>
+      <p>My name is Maxim Bakuta. I am 14 years old and currently in Grade 8 at School #9 in Oral, Kazakhstan. I am an aspiring DevSecOps engineer — a specialist who combines software development, security, and IT operations. I am passionate about technology, cybersecurity, and process automation.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">02 — Education</div>
+      <ul>
+        <li>General Education School #9 — Oral, Kazakhstan</li>
+        <li>Grade 8 (current academic year)</li>
+        <li>Self-study: DevSecOps, Linux, networking fundamentals, cybersecurity</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">03 — Skills</div>
+      <div class="skills-grid">
+        <span class="skill-tag">Linux / Bash</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Docker (basics)</span>
+        <span class="skill-tag">CI/CD (basics)</span>
+        <span class="skill-tag">Network Security</span>
+        <span class="skill-tag green">Python (learning)</span>
+        <span class="skill-tag green">Cybersecurity</span>
+        <span class="skill-tag green">HTML / CSS</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">04 — Goals</div>
+      <ul>
+        <li>Grow in DevSecOps and cloud technologies</li>
+        <li>Gain first professional IT experience</li>
+        <li>Master Python, Kubernetes and cloud platforms (AWS / Azure)</li>
+        <li>Contribute to open-source projects</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">05 — Languages</div>
+      <ul>
+        <li>Russian — native</li>
+        <li>Kazakh — conversational</li>
+        <li>English — technical (documentation reading)</li>
+      </ul>
+    </div>
+
+  </div><!-- /en -->
+
+  <!-- ══════════════════ ҚАЗАҚША ══════════════════ -->
+  <div id="kz" class="lang-content">
+
+    <div class="header">
+      <div class="name">Максим <span>Бакута</span></div>
+      <div class="title-role">[ Бастаушы DevSecOps Инженер ]</div>
+      <div class="meta-row">
+        <span class="meta-item">14 жас</span>
+        <span class="meta-item">8-сынып</span>
+        <span class="meta-item">Орал, Қазақстан</span>
+        <span class="meta-item">№9 мектеп</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">01 — Өзім туралы</div>
+      <p>Менің атым Максим Бакута. Маған 14 жас, мен Орал қаласындағы №9 мектептің 8-сыныбында оқимын. Мен бастаушы DevSecOps инженерімін — бағдарламалық жасақтаманы әзірлеу, қауіпсіздік және АТ-жүйелерін пайдалануды біріктіретін маман. Мені технологиялар, киберқауіпсіздік және процестерді автоматтандыру қызықтырады.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">02 — Білім</div>
+      <ul>
+        <li>№9 жалпы білім беретін мектеп — Орал, Қазақстан</li>
+        <li>8-сынып (ағымдағы оқу жылы)</li>
+        <li>Өздігінен оқу: DevSecOps, Linux, желі негіздері, киберқауіпсіздік</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">03 — Дағдылар</div>
+      <div class="skills-grid">
+        <span class="skill-tag">Linux / Bash</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Docker (негіздер)</span>
+        <span class="skill-tag">CI/CD (негіздер)</span>
+        <span class="skill-tag">Желілік қауіпсіздік</span>
+        <span class="skill-tag green">Python (үйренуде)</span>
+        <span class="skill-tag green">Киберқауіпсіздік</span>
+        <span class="skill-tag green">HTML / CSS</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">04 — Мақсаттар</div>
+      <ul>
+        <li>DevSecOps және бұлтты технологиялар саласында дамыту</li>
+        <li>АТ-да алғашқы кәсіби тәжірибе алу</li>
+        <li>Python, Kubernetes және бұлтты платформаларды (AWS / Azure) меңгеру</li>
+        <li>Ашық бастапқы жобаларға үлес қосу</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">05 — Тілдер</div>
+      <ul>
+        <li>Орыс тілі — ана тілі</li>
+        <li>Қазақ тілі — сөйлесу деңгейі</li>
+        <li>Ағылшын тілі — техникалық (құжаттаманы оқу)</li>
+      </ul>
+    </div>
+
+  </div><!-- /kz -->
+
+  <div class="statusbar">
+    <span>resume.html</span>
+    <span><span>ONLINE</span> · Maxim Bakuta · 2025</span>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(lang).classList.add('visible');
+    document.querySelector(`[onclick="setLang('${lang}')"]`).classList.add('active');
+  }
+</script>
+</body>
+</html>
